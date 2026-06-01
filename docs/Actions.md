@@ -36,13 +36,15 @@ Initializes the Actions instance with required dependencies.
 
 **Example:**
 ```python
+...
 from src.core.db import DataDB
 from src.core.passwordManager import PasswordManager
 from src.core.actions import Actions
 
-db = DataDB()
-password_hasher = PasswordManager()
+db = DataDB(args.db_path)
+password = PasswordManager(getpass.getpass("Enter password: ").encode('utf-8'))
 actions = Actions(db, password_hasher)
+...
 ```
 
 ---
@@ -150,7 +152,7 @@ Initializes the database by creating tables and storing the password hash.
 # First time setup
 actions.init_db()
 
-# Reinitialize (destructive)
+# Reinitialize (overwrite)
 actions.init_db(force=True)
 ```
 
