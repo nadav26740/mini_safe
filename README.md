@@ -1,6 +1,14 @@
-# mini_safe
+<div align="center">
+  
+  # Mini Safe
 
 A small, simple Python project for securely storing and managing sensitive data using password-based encryption. Built with industry-standard cryptography libraries to provide confidentiality for your data at rest.
+
+![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
+<br>
+![GitHub Issues or Pull Requests](https://img.shields.io/github/issues/nadav26740/mini_safe)
+
+</div>
 
 ## Overview
 
