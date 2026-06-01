@@ -56,16 +56,6 @@ mini_safe/
 
 This project is licensed under the [Apache License 2.0](LICENSE).
 
-## Security Considerations
-
-When working with sensitive data:
-
-- **Never commit unencrypted secrets** to version control
-- **Use strong passwords** for encryption
-- **Keep dependencies updated** to receive security patches
-- **Review the code** before storing critical data
-- **Back up your encrypted data** safely
-
 ## Contributing
 
 Contributions are welcome! Feel free to submit issues and pull requests.
