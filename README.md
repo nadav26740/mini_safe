@@ -22,6 +22,11 @@ A small, simple Python project for securely storing and managing sensitive data 
 📦 **Easy Integration** - Use it as a library or standalone tool  
 🛡️ **Secure by Default** - Uses best practices for data protection  
 
+## How data is protected
+> Using AESGCM encryption, the data is encrypted with a key derived from the user's password.
+<br><br>
+![Data Protection Diagram](./docs/gui_screenshot.png)
+
 ## Requirements
 
 - Python 3.7+
