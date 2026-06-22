@@ -3,7 +3,6 @@ from .state import State
 from core import DataDB, Actions
 from .screens import PasswordScreen
 
-DB_DEFAULT_PATH = ".temp/mini_cryptodata.db"
 
 class TuiApp(App):
     CSS = """
@@ -11,12 +10,21 @@ class TuiApp(App):
         align: center middle;
     }
     """
-    
-    def __init__(self):
+
+    def __init__(self, db_path):
         super().__init__()
         self.state = State()
+        self.state.db = DataDB(db_path)
 
     def on_mount(self) -> None:
-        self.state.db = DataDB(DB_DEFAULT_PATH);
         self.state.db.Connect()
-        self.push_screen(PasswordScreen())
+        if not self.state.db.verify_tables():
+            pass
+            self.app.notify(
+                "PLS run cli with --init to initilize db",
+                title="DB missing",
+                severity="error",
+                timeout=15,
+            )
+        else:
+            self.push_screen(PasswordScreen())
