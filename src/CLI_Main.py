@@ -1,5 +1,6 @@
 import argparse
 from core import DataDB, PasswordManager, Actions
+import pyperclip
 import getpass
 import sys
 
@@ -18,12 +19,9 @@ def main():
         help="Path to the SQLite database file. If the file does not exist, it will be created.",
     )
     parser.add_argument("--metadata", action="store_true", help="Display database metadata.")
-    
-    parser.add_argument("--init",
-        "--create-db",
-        action="store_true",
-        help="Create the database if it does not exist. If the database already exists, this option will be ignored.",
-    )
+    parser.add_argument("--clip", action="store_true", help="Copy retrieved data to clipboard instead of displaying it.")
+    parser.add_argument("--init", "--create-db", action="store_true", 
+                        help="Create the database if it does not exist. If the database already exists, this option will be ignored.",)
     
     args = parser.parse_args()
     
@@ -50,8 +48,7 @@ def main():
     # calls
     try:
         if args.init:
-            actions.init_db(args.force)
-            print("Database created successfully.")
+            handle_init(args, actions)
             return
 
         if db.verify_tables() is False:
@@ -59,29 +56,53 @@ def main():
             return
 
         if args.get:
-            data = actions.get(args.get)
-            print(f"{args.get}: {data}")
+            handle_get(args, actions)
 
         elif args.set:
-            actions.insert(args.set[0], args.set[1])
-            print(f"{args.set[0]} stored successfully.")
-            
+            handle_set(args, actions)
+
         elif args.get_all:
-            print("Stored data names:")
-            for name in actions.get_all():
-                print(name)
-        
+            handle_get_all(args, actions)
+
         elif args.metadata:
-            print("Database metadata:")
-            for key, value in actions.get_metadata().items():
-                print(f"{key}: {value}")
-            
-        
+            handle_metadata(args, actions)
+
     except Exception as e:
         print(f"Error: {e}")
         
     finally:
         db.Close()
+
+def handle_init(args, actions):
+    actions.init_db(args.force)
+    print("Database created successfully.")
+
+
+def handle_get(args, actions):
+    data = actions.get(args.get)
+    if args.clip:            
+        pyperclip.copy(data)
+        print(f"{args.get} copied to clipboard.")
+    else:
+        print(f"{args.get}: {data}")
+
+
+def handle_set(args, actions):
+    actions.insert(args.set[0], args.set[1])
+    print(f"{args.set[0]} stored successfully.")
+
+
+def handle_get_all(args, actions):
+    print("Stored data names:")
+    for name in actions.get_all():
+        print(name)
+
+
+def handle_metadata(args, actions):
+    print("Database metadata:")
+    for key, value in actions.get_metadata().items():
+        print(f"{key}: {value}")
+
 
 def help():
     print(f"{sys.argv[0]} --help")
