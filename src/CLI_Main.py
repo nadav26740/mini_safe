@@ -88,7 +88,7 @@ def handle_get(args, actions):
 
 
 def handle_set(args, actions):
-    actions.insert(args.set[0], args.set[1])
+    actions.insert(args.set[0], args.set[1], args.force)
     print(f"{args.set[0]} stored successfully.")
 
 

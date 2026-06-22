@@ -1,7 +1,7 @@
 from textual.app import ComposeResult
 from textual.screen import Screen
 from textual.widgets import Label, Button, Static
-
+from .modify_data import ModifyData
 import pyperclip
 
 class DataView(Screen):
@@ -37,7 +37,6 @@ class DataView(Screen):
     #button-grid {
         layout: grid;
         grid-size: 4;       /* 2 columns, 2 rows */
-        grid-gutter: 1 2;     /* Vertical and horizontal spacing between buttons */
         height: auto;
     }
 
@@ -78,7 +77,7 @@ class DataView(Screen):
             with Static(id="button-grid"):
                 yield Button("Decrypt", variant="primary", id="btn-decrypt")
                 yield Button("Copy to clipboard", variant="default", id="btn-copy")
-                yield Button("Set", variant="success", id="btn-set")
+                yield Button("Modify", variant="success", id="btn-set")
                 yield Button("Back", variant="error", id="btn-back")
                 
             # Feedback notification area
@@ -101,8 +100,11 @@ class DataView(Screen):
             status_bar.update("📋 Copied to system clipboard!")
             
         elif button_id == "btn-set":
-            status_bar.update("⚙️ Variable settings updated.")
+            self.app.push_screen(ModifyData(self.data_name), callback=self.handle_return)
             
         elif button_id == "btn-back":
             # Returns to the previous screen (ListScreen) on the screen stack
-            self.app.pop_screen()
+            self.dismiss()
+
+    def handle_return(self, result=None):
+        self.dismiss()

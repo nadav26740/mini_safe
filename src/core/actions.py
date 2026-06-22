@@ -57,8 +57,8 @@ class Actions:
         if self.__verify_password() is False:
             raise RuntimeError("Password verification failed.")
         
-        data = self._db.Get_data(name)
-        if encrypted_data is not None and not force:
+        query = self._db.Get_data(name)
+        if query is not None and not force:
             return False
         
         encrypted_data = self.encryptor.encrypt(self._password_hasher.decryptPassword(), data)
@@ -85,6 +85,9 @@ class Actions:
             raise RuntimeError("Password verification failed.")
         
         return self._db.Get_All_names_in_DB()
+
+    def delete(self, name: str):
+        self._db.delete_data(name)
 
     def get_metadata(self):
         """Get database metadata."""
