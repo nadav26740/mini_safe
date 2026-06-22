@@ -20,9 +20,9 @@ class ModifyData(Screen):
     
     #name-bar {
         text-style: bold;
-        text-align: center;
         border: round white;  /* Title enclosed in a border */
         width: 100%;
+        margin-bottom: 1;
     }
     
     Input {
@@ -40,7 +40,6 @@ class ModifyData(Screen):
     
     #data-bar {
         text-style: bold;
-        border: round white;  /* Title enclosed in a border */
         width: 100%;
         margin-bottom: 2;
         padding: 0 1;
@@ -83,7 +82,7 @@ class ModifyData(Screen):
             # Title enclosed in a rounded border
             yield Label(f"Add data", id="title-label")
 
-            yield Label("Name:")
+            # yield Label("Name:")
             yield Label(self.data_name, id="name-bar")
 
             yield Label("Data:")
@@ -97,6 +96,10 @@ class ModifyData(Screen):
                 
             # Feedback notification area
             yield Static("", id="status-bar")
+
+    def _on_mount(self) -> None:
+        widget = self.query_one("#name-bar", Label)
+        widget.border_title = "Name:"
 
     # Catch button press events
     def on_button_pressed(self, event: Button.Pressed) -> None:

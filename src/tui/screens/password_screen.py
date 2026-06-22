@@ -62,9 +62,9 @@ class PasswordScreen(Screen):
         self.app.state.actions = Actions(self.app.state.db, self.app.state.passManager)
 
         if self.app.state.actions.verify_password():
-            message_widget.update("✅ Correct Password!")
-            message_widget.styles.border = ("solid", "green")
-            message_widget.styles.color = "green"
+            self.app.notify("✅ Correct Password!")
+            # message_widget.styles.border = ("solid", "green")
+            # message_widget.styles.color = "green"
             self.app.push_screen(DataList())
         
         else:

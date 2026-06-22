@@ -28,6 +28,10 @@ class DataList(Screen):
         color: $text;
         padding: 0 1;
     }
+    
+    #password-list {
+        border: cyan;
+    }
 
     ListView {
         border: heavy blue;
@@ -91,8 +95,10 @@ class DataList(Screen):
 
     def on_mount(self) -> None:
         # Load initial data when screen first mounts
+        self.db_items: list[str] = []
         self.reload_data()
         list_view = self.query_one("#password-list", ListView).focus()
+        list_view.border_title = "Secrets"
 
         return
 
@@ -141,7 +147,11 @@ class DataList(Screen):
 
 
     def reload_data(self):
-        self.db_items = self.app.state.actions.get_all()
+        elements = self.app.state.actions.get_all()
+        if (elements == self.db_items):
+            return
+
+        self.db_items = elements
         self.rerender_list(self.db_items)
         return
 
