@@ -29,6 +29,25 @@ class ConfirmationDialog(ModalScreen[bool]):
         grid-size: 2; /* 2 columns for Yes and No side-by-side */
         grid-gutter: 2;
     }
+    
+    Button {
+        background: transparent;
+        width: 40%;
+    }
+    
+    Button.yes {
+        border: tall green;
+    }
+    
+    Button.no {
+        border: tall red;
+    }
+    
+    Button:focus {
+        text-style: bold;
+        background: $accent;
+        color: $text;
+    }
     """
 
     def __init__(self, message: str) -> None:

@@ -61,6 +61,13 @@ class DataList(Screen):
         background: $accent;
         color: $text;
     }
+    
+    #search-bar {
+        width: 50%;
+        height: 3;
+        margin-bottom: 1;
+        background: transparent;
+    }
     """
 
     def compose(self) -> ComposeResult:
@@ -69,6 +76,7 @@ class DataList(Screen):
             yield Label("Secrets", id="screen-title")
             
             # The List View containing our items
+            yield Input(placeholder="search..", id="search-bar")
             yield ListView(id="password-list")
             
             # Place to show which item was clicked
@@ -80,26 +88,39 @@ class DataList(Screen):
         
         return
 
+
     def on_mount(self) -> None:
         # Load initial data when screen first mounts
         self.reload_data()
+        list_view = self.query_one("#password-list", ListView).focus()
+
+        return
+
 
     # This handles whenever a user presses 'Enter' or clicks a list item
     def on_list_view_selected(self, event: ListView.Selected) -> None:
         # Extract the label text from inside the selected ListItem
         selected_text = getattr(event.item, "name", "Unknown")        
         # Trigger your function
-        self.app.push_screen(DataView(selected_text),
-                            callback=self.handle_return)
+        self.app.push_screen(
+            DataView(selected_text),
+            callback=self.handle_return)
         return
+
+    # This runs every single time a key is pressed inside the input box
+    def on_input_changed(self, event: Input.Changed) -> None:
+        if event.control.id == "search-bar":
+            self.filter_data(event.value)
+
 
     # Catch button press events
     def on_button_pressed(self, event: Button.Pressed) -> None:
         button_id = event.button.id
 
         if button_id == "btn-add":
-            self.app.push_screen(AddData(),
-                                callback=self.handle_return)
+            self.app.push_screen(
+                AddData(),
+                callback=self.handle_return)
             
         elif button_id == "btn-exit":
             self.app.exit()
@@ -111,17 +132,34 @@ class DataList(Screen):
         status = self.query_one("#action-status", Static)
         status.update(f"Selected: {item_name}")
         return
-    
+
+
+    def filter_data(self, filter: str):
+        items = [element for element in self.db_items if filter in element]
+        self.rerender_list(items)
+        return
+
+
     def reload_data(self):
+        self.db_items = self.app.state.actions.get_all()
+        self.rerender_list(self.db_items)
+        return
+
+
+    def rerender_list(self, elements):
+        if (len(elements) == 0):
+            return
+
         list_view = self.query_one("#password-list", ListView)
         list_view.clear()
 
-        db_items = self.app.state.actions.get_all()
-        for item in db_items:
+        for item in elements:
             item: str
             list_item = ListItem(Label(item), name=item)
             list_view.append(list_item)
+        list_view.index = 0        
         return
+
 
     def handle_return(self, result=None):
         """reloading the window on returning to it
