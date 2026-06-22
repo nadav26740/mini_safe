@@ -83,7 +83,7 @@ class ModifyData(Screen):
             yield Label(f"Add data", id="title-label")
 
             # yield Label("Name:")
-            yield Label(self.data_name, id="name-bar")
+            yield Label(f" {self.data_name}", id="name-bar")
 
             yield Label("Data:")
             yield Input(password=True, placeholder="Enter secret...", id="data-input")

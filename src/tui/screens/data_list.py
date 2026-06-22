@@ -97,9 +97,8 @@ class DataList(Screen):
         # Load initial data when screen first mounts
         self.db_items: list[str] = []
         self.reload_data()
-        list_view = self.query_one("#password-list", ListView).focus()
-        list_view.border_title = "Secrets"
-
+        widget = self.query_one("#password-list", ListView).focus()
+        widget.border_title = "Secrets"
         return
 
 

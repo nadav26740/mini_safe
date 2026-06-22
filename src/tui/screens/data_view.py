@@ -82,6 +82,14 @@ class DataView(Screen):
                 
             # Feedback notification area
             yield Static("", id="status-bar")
+    
+    def on_mount(self):
+        widget = self.query_one("#data-bar")
+        widget.border_title = "Data:"
+        
+        widget = self.query_one("#title-label")
+        widget.border_title = "Name:"
+
 
     # Catch button press events
     def on_button_pressed(self, event: Button.Pressed) -> None:
