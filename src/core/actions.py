@@ -23,9 +23,6 @@ class Actions:
         return self._password_hasher.verify_password(bytes.fromhex(salty_password_hash))
 
 
-    def verify_password(self) -> bool:
-        return self.__verify_password()
-
     def get(self, name: str):
         """Get data by name."""
         if self.__verify_password() is False:
@@ -38,32 +35,13 @@ class Actions:
         return self.encryptor.decrypt(self._password_hasher.decryptPassword(), encrypted_data)
 
 
-    def insert(self, name: str, data: str, force: bool = False) -> bool:
-        """Set data by name
-
-        Args:
-            name (str): Getting name of data to save
-            data (str): data to save
-            force (bool, optional): overwrite existsing data. Defaults to False.
-
-        Raises:
-            RuntimeError: verification failure
-
-        Returns:
-            _type_: bool
-            
-            False if data with this name already exists
-        """
+    def insert(self, name: str, data: str):
+        """Set data by name"""
         if self.__verify_password() is False:
             raise RuntimeError("Password verification failed.")
         
-        query = self._db.Get_data(name)
-        if query is not None and not force:
-            return False
-        
         encrypted_data = self.encryptor.encrypt(self._password_hasher.decryptPassword(), data)
         self._db.Save_data(name, encrypted_data)
-        return True
 
 
     def init_db(self, force: bool = False):
@@ -85,9 +63,6 @@ class Actions:
             raise RuntimeError("Password verification failed.")
         
         return self._db.Get_All_names_in_DB()
-
-    def delete(self, name: str):
-        self._db.delete_data(name)
 
     def get_metadata(self):
         """Get database metadata."""

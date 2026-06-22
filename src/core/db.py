@@ -205,17 +205,4 @@ class DataDB:
 
     def is_connected(self) -> bool:
         """Check if the database connection is active."""
-        return self._conn is not None    
-
-    def delete_data(self, name) -> None:
-        cursor = self._conn.cursor()
-        
-        cursor.execute(
-            f"""
-            DELETE FROM {TABLE_DATA_STORE}
-            WHERE {COLUMN_NAME} = ?
-        """,
-        (name,)
-        )
-
-        self._conn.commit()
+        return self._conn is not None
