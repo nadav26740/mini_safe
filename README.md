@@ -29,13 +29,8 @@ A small, simple Python project for securely storing and managing sensitive data 
 
 ## Requirements
 
-- Python 3.7+
+- Python 3.10+
 - Dependencies listed in `requirements.txt`:
-  - `bcrypt==5.0.0` - Password hashing
-  - `cryptography==48.0.0` - Encryption primitives
-  - `cffi==2.0.0` - C Foreign Function Interface
-  - `pycparser==2.23` - C parser
-  - `typing_extensions==4.15.0` - Type hints
 
 ## Installation
 
