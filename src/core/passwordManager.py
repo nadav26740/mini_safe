@@ -2,6 +2,8 @@ import bcrypt
 from cryptography.fernet import Fernet
 
 class PasswordManager:
+    """Password manager manage the password while keeping it encrypted in memory
+    """
     def __init__(self, password: bytes):
         self.memkey = Fernet.generate_key()
         self.cipher = Fernet(self.memkey)
