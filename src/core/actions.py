@@ -23,6 +23,9 @@ class Actions:
         return self._password_hasher.verify_password(bytes.fromhex(salty_password_hash))
 
 
+    def verify_password(self) -> bool:
+        return self.__verify_password()
+
     def get(self, name: str):
         """Get data by name."""
         if self.__verify_password() is False:
