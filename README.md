@@ -54,6 +54,9 @@ A small, simple Python project for securely storing and managing sensitive data 
 
 _Usage examples and API documentation coming soon._
 
+### TUI
+![TUI screenshot](./docs/Screenshot_TUI.png)
+
 ## Project Structure
 
 ```
