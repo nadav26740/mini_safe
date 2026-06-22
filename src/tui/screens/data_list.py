@@ -139,8 +139,9 @@ class DataList(Screen):
         return
 
 
-    def filter_data(self, filter: str):
-        items = [element for element in self.db_items if filter in element]
+    def filter_data(self, fillter: str):
+        fillter = fillter.lower()
+        items = [element for element in self.db_items if fillter in element.lower()]
         self.rerender_list(items)
         return
 
@@ -156,11 +157,11 @@ class DataList(Screen):
 
 
     def rerender_list(self, elements):
-        if (len(elements) == 0):
-            return
-
         list_view = self.query_one("#password-list", ListView)
         list_view.clear()
+
+        if (len(elements) == 0):
+            return
 
         for item in elements:
             item: str
