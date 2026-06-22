@@ -65,7 +65,7 @@ class DataView(Screen):
     def __init__(self, data_name: str) -> None:
         super().__init__()  # Crucial: Initialize the base Screen class
         self.data_name = data_name
-        self.data = "Encrypted..."
+        self.data = "🔐 Secret"
 
     def compose(self) -> ComposeResult:
         with Static(id="view-container"):
