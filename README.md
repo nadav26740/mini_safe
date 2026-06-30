@@ -48,6 +48,8 @@ A small, simple Python project for securely storing and managing sensitive data 
 ## Usage
 
 _Usage examples and API documentation coming soon._
+> * run ``python src/cli_main.py`` for the normal run
+> * run ``python src/tui_main.py`` for the TUI mode
 
 ### TUI
 ![TUI screenshot](./docs/Screenshot_TUI.png)
