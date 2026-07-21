@@ -1,0 +1,21 @@
+Source: mini-safe
+Section: utils
+Priority: optional
+Maintainer: Nadav mordechai <nadav26740@gmail.com>
+Build-Depends: debhelper-compat (= 13),
+               dh-python,
+               python3-all,
+               python3-build,
+               python3-setuptools,
+               python3-wheel
+Standards-Version: 4.7.0
+Rules-Requires-Root: no
+Homepage: https://github.com/nadav26740/mini_safe
+
+Package: mini-safe
+Architecture: any
+Depends: ${misc:Depends}, ${python3:Depends}
+Description: Password and data safe with CLI and TUI interfaces
+ A small Python utility for securely storing sensitive data with
+ password-based encryption. It provides both a command-line interface
+ and a terminal user interface.

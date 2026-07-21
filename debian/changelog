@@ -1,0 +1,5 @@
+mini-safe (1.0.0-1) unstable; urgency=medium
+
+  * Initial Debian packaging release.
+
+ -- Nadav Mordechai <nadav26740@gmail.com>  Tue, 21 Jul 2026 00:00:00 +0000

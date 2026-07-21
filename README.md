@@ -45,6 +45,84 @@ A small, simple Python project for securely storing and managing sensitive data 
    pip install -r requirements.txt
    ```
 
+3. Run the TUI application:
+   ```bash
+   python -m TUI_main
+   ```
+
+## Building packages
+
+### Python wheel and source distribution
+
+Build the Python package artifacts locally:
+
+```bash
+python -m pip install --upgrade build
+python -m build
+```
+
+Artifacts will be written to the dist directory.
+
+### Debian package
+
+The repository includes a Debian packaging scaffold for Debian 12 / Ubuntu 24.04 style builds.
+
+1. Install packaging dependencies:
+   ```bash
+   sudo apt update
+   sudo apt install -y devscripts debhelper dh-python python3-all python3-build python3-setuptools python3-wheel
+   ```
+
+2. Build the Debian package from the repository root:
+   ```bash
+   dpkg-buildpackage -us -uc
+   ```
+
+3. Install the resulting Debian package:
+   ```bash
+   sudo dpkg -i ../mini-safe_1.0.0-1_all.deb
+   ```
+
+### Fedora package
+
+The repository includes a Fedora spec file for RPM builds.
+
+1. Install Fedora packaging tools:
+   ```bash
+   sudo dnf install -y rpmdevtools rpmbuild python3-devel python3-setuptools python3-wheel
+   ```
+
+2. Prepare the build tree:
+   ```bash
+   rpmdev-setuptree
+   cp dist/mini_safe-1.0.0.tar.gz ~/rpmbuild/SOURCES/
+   cp packaging/fedora/mini-safe.spec ~/rpmbuild/SPECS/
+   ```
+
+3. Build the RPM:
+   ```bash
+   rpmbuild -ba ~/rpmbuild/SPECS/mini-safe.spec
+   ```
+
+4. Install the resulting RPM:
+   ```bash
+   sudo dnf install -y ~/rpmbuild/RPMS/noarch/mini-safe-1.0.0-1.noarch.rpm
+   ```
+
+## Running the application
+
+After installation, use:
+
+```bash
+mini-safe
+```
+
+To run the CLI interface directly:
+
+```bash
+mini-safe-cli
+```
+
 ## Usage
 
 _Usage examples and API documentation coming soon._
