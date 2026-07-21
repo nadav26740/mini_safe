@@ -85,6 +85,28 @@ Artifacts will be written to the dist directory.
 
 ## Fedora package
 
+### Dependancies
+#### For your mini-safe RPM, the required Fedora packages to install are:
+```sh
+sudo dnf install \
+   python3-bcrypt \
+   python3-cryptography \
+   python3-pyperclip \
+   python3-rich \
+   python3-textual
+```
+
+#### For building the RPM package:
+```sh
+sudo dnf install \
+    rpm-build \
+    rpmdevtools \
+    python3-devel \
+    python3-pyproject-rpm-macros \
+    python3-setuptools \
+    python3-wheel
+```
+
 > The repository includes a Fedora spec file for RPM builds.
 
 1. Install Fedora packaging tools:
@@ -108,6 +130,8 @@ Artifacts will be written to the dist directory.
    ```bash
    sudo dnf install -y ~/rpmbuild/RPMS/noarch/mini-safe-1.0.0-1.noarch.rpm
    ```
+   > Watch out as the name of the rpm could be different
+   > use `` ls ~/rpmbuild/RPMS/noarch/`` to check for the correct name
 
 ## Running the application
 

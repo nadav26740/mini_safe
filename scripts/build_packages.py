@@ -36,7 +36,7 @@ def build_fedora_package():
     print("Fedora build requires rpmbuild and rpmdevtools.")
     print("Run:")
     print("  rpmdev-setuptree")
-    print("  cp dist/mini_safe-1.0.0.tar.gz ~/rpmbuild/SOURCES/")
+    print("  cp dist/mini-safe-1.0.0.tar.gz ~/rpmbuild/SOURCES/")
     print("  cp packaging/fedora/mini-safe.spec ~/rpmbuild/SPECS/")
     print("  rpmbuild -ba ~/rpmbuild/SPECS/mini-safe.spec")
 
