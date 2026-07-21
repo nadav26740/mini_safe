@@ -63,9 +63,9 @@ python -m build
 
 Artifacts will be written to the dist directory.
 
-### Debian package
+## Debian package
 
-The repository includes a Debian packaging scaffold for Debian 12 / Ubuntu 24.04 style builds.
+> The repository includes a Debian packaging scaffold for Debian 12 / Ubuntu 24.04 style builds.
 
 1. Install packaging dependencies:
    ```bash
@@ -83,9 +83,9 @@ The repository includes a Debian packaging scaffold for Debian 12 / Ubuntu 24.04
    sudo dpkg -i ../mini-safe_1.0.0-1_all.deb
    ```
 
-### Fedora package
+## Fedora package
 
-The repository includes a Fedora spec file for RPM builds.
+> The repository includes a Fedora spec file for RPM builds.
 
 1. Install Fedora packaging tools:
    ```bash
