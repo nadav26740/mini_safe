@@ -4,6 +4,7 @@ Priority: optional
 Maintainer: Nadav mordechai <nadav26740@gmail.com>
 Build-Depends: debhelper-compat (= 13),
                dh-python,
+               pybuild-plugin-pyproject,
                python3-all,
                python3-build,
                python3-setuptools,
