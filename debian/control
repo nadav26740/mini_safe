@@ -15,7 +15,13 @@ Homepage: https://github.com/nadav26740/mini_safe
 
 Package: mini-safe
 Architecture: any
-Depends: ${misc:Depends}, ${python3:Depends}
+Depends: ${misc:Depends},
+         ${python3:Depends},
+         python3-bcrypt,
+         python3-cryptography,
+         python3-pyperclip,
+         python3-rich,
+         python3-textual
 Description: Password and data safe with CLI and TUI interfaces
  A small Python utility for securely storing sensitive data with
  password-based encryption. It provides both a command-line interface
