@@ -2,7 +2,7 @@
   
   # Mini Safe
 
-A small, simple Python project for securely storing and managing sensitive data using password-based encryption. Built with industry-standard cryptography libraries to provide confidentiality for your data at rest.
+A small, simple Python project for securely storing and managing sensitive data using password-based encryption. Built with industry-standard cryptography libraries to provide confidentiality for your sensitive information.
 
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
 <br>
@@ -12,7 +12,7 @@ A small, simple Python project for securely storing and managing sensitive data 
 
 ## Overview
 
-`mini_safe` is a lightweight utility designed to help you encrypt and store sensitive information (passwords, API keys, personal data, etc.) securely. It uses password-based key derivation and modern encryption algorithms to protect your data.
+`mini_safe` is a lightweight utility designed to help you encrypt and store sensitive information (passwords, API keys, personal data, etc.) securely. It uses password-based key derivation and modern AESGCM encryption to ensure your data remains confidential.
 
 ## Features
 
@@ -30,9 +30,11 @@ A small, simple Python project for securely storing and managing sensitive data 
 ## Requirements
 
 - Python 3.10+
-- Dependencies listed in `requirements.txt`:
+- Dependencies are managed through `pyproject.toml`
 
 ## Installation
+
+### From source with pip
 
 1. Clone the repository:
    ```bash
@@ -40,14 +42,14 @@ A small, simple Python project for securely storing and managing sensitive data 
    cd mini_safe
    ```
 
-2. Install dependencies:
+2. Install the package:
    ```bash
-   pip install -r requirements.txt
+   pip install .
    ```
 
 3. Run the TUI application:
    ```bash
-   python -m TUI_main
+   mini-safe
    ```
 
 ## Building packages
@@ -67,10 +69,12 @@ Artifacts will be written to the dist directory.
 
 > The repository includes a Debian packaging scaffold for Debian 12 / Ubuntu 24.04 style builds.
 
+### Installation dependencies
+
 1. Install packaging dependencies:
    ```bash
    sudo apt update
-   sudo apt install -y devscripts debhelper dh-python python3-all python3-build python3-setuptools python3-wheel
+   sudo apt install -y devscripts debhelper dh-python python3-all python3-build python3-setuptools python3-wheel pybuild-plugin-pyproject
    ```
 
 2. Build the Debian package from the repository root:
@@ -83,10 +87,15 @@ Artifacts will be written to the dist directory.
    sudo dpkg -i ../mini-safe_1.0.0-1_all.deb
    ```
 
+### Note on dependencies
+
+The Debian package uses relaxed version constraints to work with versions available in Ubuntu/Debian distributions. All runtime dependencies are automatically installed as part of the package installation.
+
 ## Fedora package
 
-### Dependancies
-#### For your mini-safe RPM, the required Fedora packages to install are:
+### Runtime dependencies
+
+For your mini-safe RPM, the required Fedora packages are:
 ```sh
 sudo dnf install \
    python3-bcrypt \
@@ -96,7 +105,9 @@ sudo dnf install \
    python3-textual
 ```
 
-#### For building the RPM package:
+### Build dependencies
+
+For building the RPM package:
 ```sh
 sudo dnf install \
     rpm-build \
@@ -107,7 +118,9 @@ sudo dnf install \
     python3-wheel
 ```
 
-> The repository includes a Fedora spec file for RPM builds.
+### Building
+
+The repository includes a Fedora spec file for RPM builds.
 
 1. Install Fedora packaging tools:
    ```bash
@@ -130,8 +143,7 @@ sudo dnf install \
    ```bash
    sudo dnf install -y ~/rpmbuild/RPMS/noarch/mini-safe-1.0.0-1.noarch.rpm
    ```
-   > Watch out as the name of the rpm could be different
-   > use `` ls ~/rpmbuild/RPMS/noarch/`` to check for the correct name
+   > Note: The RPM name may vary. Use `ls ~/rpmbuild/RPMS/noarch/` to find the correct filename
 
 ## Running the application
 
@@ -149,11 +161,18 @@ mini-safe-cli
 
 ## Usage
 
-_Usage examples and API documentation coming soon._
-> * run ``python src/cli_main.py`` for the normal run
-> * run ``python src/tui_main.py`` for the TUI mode
+### CLI
+Run the command-line interface:
+```bash
+mini-safe-cli
+```
 
 ### TUI
+Run the terminal user interface:
+```bash
+mini-safe
+```
+
 ![TUI screenshot](./docs/Screenshot_TUI.png)
 
 ## Project Structure
@@ -161,10 +180,12 @@ _Usage examples and API documentation coming soon._
 ```
 mini_safe/
 ├── src/              # Source code
-├── requirements.txt  # Python dependencies
-├── LICENSE          # Apache 2.0 License
-├── .gitignore       # Git ignore rules
-└── README.md        # This file
+├── debian/           # Debian packaging files
+├── packaging/        # RPM and other packaging files
+├── pyproject.toml    # Project configuration and dependencies
+├── LICENSE           # Apache 2.0 License
+├── .gitignore        # Git ignore rules
+└── README.md         # This file
 ```
 
 ## License
