@@ -18,7 +18,7 @@ MarkupSafe==3.0.3
 mdit-py-plugins==0.4.2
 mdurl==0.1.2
 msgpack==1.2.1
-multidict==6.7.1
+multidict==6.9.1
 platformdirs==4.4.0
 propcache==0.4.1
 pycparser==2.23
